@@ -99,8 +99,9 @@ function compareObjects(obj1, obj2) {
  *    isEmptyObject({}) => true
  *    isEmptyObject({a: 1}) => false
  */
-function isEmptyObject(/* obj */) {
-  throw new Error('Not implemented');
+function isEmptyObject(obj) {
+  const arr = Object.keys(obj);
+  return !arr.length;
 }
 
 /**
@@ -133,8 +134,23 @@ function makeImmutable(/* obj */) {
  *    makeWord({ a: [0, 1], b: [2, 3], c: [4, 5] }) => 'aabbcc'
  *    makeWord({ H:[0], e: [1], l: [2, 3, 8], o: [4, 6], W:[5], r:[7], d:[9]}) => 'HelloWorld'
  */
-function makeWord(/* lettersObject */) {
-  throw new Error('Not implemented');
+function makeWord(lettersObject) {
+  const newArr = [];
+  const elements = Object.entries(lettersObject).flat(Infinity);
+  const elementsToIterate = Object.entries(lettersObject);
+  const totalLetters =
+    elements.filter((elem) => typeof elem === 'number').sort((a, b) => a - b)
+      .length - 1;
+  for (let i = 0; i <= totalLetters; i += 1) {
+    elementsToIterate.forEach((elem) => {
+      elem[1].forEach((el) => {
+        if (el === i) {
+          newArr.push(elem[0]);
+        }
+      });
+    });
+  }
+  return newArr.join('');
 }
 
 /**
@@ -182,8 +198,8 @@ function Rectangle(/* width, height */) {
  *    [1,2,3]   =>  '[1,2,3]'
  *    { width: 10, height : 20 } => '{"height":10,"width":20}'
  */
-function getJSON(/* obj */) {
-  throw new Error('Not implemented');
+function getJSON(obj) {
+  return JSON.stringify(obj);
 }
 
 /**
